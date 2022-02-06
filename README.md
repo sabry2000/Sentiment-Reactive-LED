@@ -1,9 +1,9 @@
 # Sentiment-Reactive-LED
-This project is our submission for the BCHacks 3.0 Hackathon. All info can be found in this README.md and Devpost[https://devpost.com/software/sentiment-reactive-leds?ref_content=user-portfolio&ref_feature=in_progress]. 
+This project is our submission for the BCHacks 3.0 Hackathon. All info can be found in this README.md and [Devpost](https://devpost.com/software/sentiment-reactive-leds?ref_content=user-portfolio&ref_feature=in_progress). 
 
 
 ## Hardware Needed
-The hardware for this project is pretty simple, however, if you are looking for the best performance then follow the tutorial found [here] (https://dordnung.de/raspberrypi-ledstrip/ws2812). 
+The hardware for this project is pretty simple, however, if you are looking for the best performance then follow the tutorial found [here](https://dordnung.de/raspberrypi-ledstrip/ws2812). 
 
 
 1 x Raspberry Pi. 
