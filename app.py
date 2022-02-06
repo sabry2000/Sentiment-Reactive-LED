@@ -39,8 +39,8 @@ st.subheader('Submit a video link or choose one of the pre-determined ones to an
 video_url = st.text_input(label='Earnings call link', value="https://www.youtube.com/watch?v=UA-ISgpgGsk")
 
 # Save audio locally
-# save_location = save_audio(video_url)
-save_location = "./UA-ISgpgGsk.mp3"
+save_location = save_audio(video_url)
+# save_location = "./UA-ISgpgGsk.mp3"
 
 ## Upload audio to AssemblyAI
 CHUNK_SIZE = 5242880

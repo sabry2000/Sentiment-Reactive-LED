@@ -26,7 +26,8 @@ starts = []
 ends = []
 durations = []
 
-async def receiver():
+# Async method obsolete
+async def receiverX():
     global colors, starts, ends
 
     print('Waiting for connection')
@@ -48,6 +49,64 @@ async def receiver():
         ends.append(end)
         durations.append(duration)
 
+# asyncio.get_event_loop().run_until_complete(receiver())
+
+
+def receiver():
+    global colors, starts, ends, durations
+
+    host='192.168.0.30' #client ip
+    port = 4005
+
+    server = ('192.168.0.24', 4000)
+
+    print('Waiting for connection')
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind((host,port))
+    print('Established Connection')
+
+    s.sendto("RPi".encode('utf-8'), server)
+    print("Sent RPi")
+
+    data, addr = s.recvfrom(1024)
+    numOfElements = int(data.decode('utf-8'))
+    print('Number of Elements is ' + str(numOfElements))
+    s.sendto("OK".encode('utf-8'), server)
+
+    for i in range(numOfElements):
+        data, addr = s.recvfrom(1024)
+        color = data.decode('utf-8')
+        print("Received " + color)
+
+        #s.sendto("OK".encode('utf-8'), server)
+
+        data, addr = s.recvfrom(1024)
+        data = data.decode('utf-8')
+        start = int(data)
+        print("Received " + data)
+
+        #s.sendto("OK".encode('utf-8'), server)
+
+        data, addr = s.recvfrom(1024)
+        data = data.decode('utf-8')
+        end = int(data)
+        print("Received " + data)
+
+        #s.sendto("OK".encode('utf-8'), server)
+
+        duration = end - start
+
+        colors.append(color)
+        starts.append(start)
+        ends.append(end)
+        durations.append(duration)
+        print(i)
+
+        #time.sleep(500)
+        s.sendto("OK".encode('utf-8'), server)
+
+    s.close()
+
 def adjustColors(color, R, G, B):
     if color == 'r':
         [R, G, B] = adjust(R,G,B)
@@ -56,6 +115,7 @@ def adjustColors(color, R, G, B):
     else:
         [B, R, G] = adjust(B,R,G)
     return R, G, B
+
 
 def adjust(plus,minus,zero):
     if plus < 255:
@@ -89,60 +149,7 @@ if __name__ == '__main__':
                 parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
                 args = parser.parse_args()
 
-
-                # asyncio.get_event_loop().run_until_complete(receiver())
-
-                host='192.168.0.30' #client ip
-                port = 4005
-
-                server = ('192.168.0.24', 4000)
-
-                print('Waiting for connection')
-                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                s.bind((host,port))
-                print('Established Connection')
-
-                s.sendto("RPi".encode('utf-8'), server)
-                print("Sent RPi");
-
-                data, addr = s.recvfrom(1024)
-                numOfElements = int(data.decode('utf-8'))
-                print('Number of Elements is ' + str(numOfElements))
-                s.sendto("OK".encode('utf-8'), server)
-
-                for i in range(numOfElements):
-                    data, addr = s.recvfrom(1024)
-                    color = data.decode('utf-8')
-                    print("Received " + color)
-
-                    #s.sendto("OK".encode('utf-8'), server)
-
-                    data, addr = s.recvfrom(1024)
-                    data = data.decode('utf-8')
-                    start = int(data)
-                    print("Received " + data)
-
-                    #s.sendto("OK".encode('utf-8'), server)
-
-                    data, addr = s.recvfrom(1024)
-                    data = data.decode('utf-8')
-                    end = int(data)
-                    print("Received " + data)
-
-                    #s.sendto("OK".encode('utf-8'), server)
-
-                    duration = end - start
-
-                    colors.append(color)
-                    starts.append(start)
-                    ends.append(end)
-                    durations.append(duration)
-                    print(i)
-
-                    #time.sleep(500)
-                    s.sendto("OK".encode('utf-8'), server)
-
-                s.close()
+                receiver()
 
                 # Create NeoPixel object with appropriate configuration.
                 strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)

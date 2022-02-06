@@ -8,6 +8,7 @@ colors = []
 starts = []
 ends = []
 
+# Async Method Obsolete
 async def server(websocket, path):
     global colors, starts, ends
 
@@ -26,7 +27,14 @@ async def server(websocket, path):
                 await websocket.send(starts[i])
                 await websocket.send(ends[i])
                 
-            print(confirm)      
+            print(confirm)
+
+#loop = asyncio.new_event_loop()
+#asyncio.set_event_loop(loop)
+
+#start_server = websockets.serve(server, "localhost", 8765)   
+#asyncio.get_event_loop().run_until_complete(start_server)
+#asyncio.get_event_loop().run_forever()    
 
 def sendSentimentAnalysisResults(sar_df):
     global colors, starts, ends
@@ -82,10 +90,3 @@ def sendSentimentAnalysisResults(sar_df):
                 
             print(confirm)   
             s.close()
-
-    #loop = asyncio.new_event_loop()
-    #asyncio.set_event_loop(loop)
-
-    #start_server = websockets.serve(server, "localhost", 8765)   
-    #asyncio.get_event_loop().run_until_complete(start_server)
-    #asyncio.get_event_loop().run_forever()
