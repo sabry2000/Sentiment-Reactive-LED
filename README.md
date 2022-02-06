@@ -33,8 +33,6 @@ Additional Resources:
 
 [Rasp Pi GPIO Config](https://raspi.tv/2013/rpi-gpio-basics-6-using-inputs-and-outputs-together-with-rpi-gpio-pull-ups-and-pull-downs). 
 
-[Rasp Pi IO Schematic](https://roboindia.com/tutorials/raspberry-digital-input-push-button/#:~:text=A%20discrete%20signal%20(digital%20signal,is%20released%20terminals%20get%20disconnected).  
-
 [Rasp Pi GPIO](https://littlebirdelectronics.com.au/guides/92/digital-inputs-with-raspberry-pi).  
 
 
