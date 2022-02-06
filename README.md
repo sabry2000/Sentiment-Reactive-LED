@@ -7,8 +7,11 @@ The hardware for this project is pretty simple, however, if you are looking for 
 
 
 1 x Raspberry Pi. 
+
 1 x 330Ω resistor. 
+
 1 x 4.7kΩ resistor. 
+
 1 x any color LED. 
 
 1 x button switch. 
